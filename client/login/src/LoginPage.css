@@ -1,0 +1,91 @@
+/* Light background styling for the container */
+.bg-light-gray {
+  background-color: #f8f9fa; /* Light gray background for the entire page */
+}
+
+/* Button styling for Access Account */
+.login-button {
+  width: 100%; /* Ensure full width */
+  padding: 12px 10px; /* Match the padding for both buttons */
+  background: linear-gradient(145deg, rgba(64, 41, 214, 1), rgba(16, 185, 129, 1)); /* Gradient for a vibrant look */
+  color: #fff; /* White text */
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 90px; /* Rounded edges */
+  box-shadow: 
+    5px 5px 15px rgba(0, 0, 0, 0.5), /* Button shadow for depth */
+    -5px -5px 15px rgba(133, 14, 14, 0.1); /* Button highlight */
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.login-button:hover {
+  background: linear-gradient(145deg, rgba(34, 197, 94, 1), rgba(11, 80, 141, 1)); /* Darker gradient on hover */
+  transform: translateY(-3px); /* Lift effect on hover */
+  box-shadow: 
+    7px 7px 20px rgba(0, 0, 0, 0.7), /* Stronger shadow on hover */
+    -7px -7px 20px rgba(255, 255, 255, 0.2); /* Stronger highlight on hover */
+}
+
+/* Button styling for Sign Up */
+.signup-button {
+  width: 100%; /* Ensure full width */
+  padding: 12px 10px; /* Match the padding of Access Account button */
+  background: linear-gradient(145deg, rgba(64, 41, 214, 1), rgba(16, 185, 129, 1)); /* Gradient for a vibrant look */
+  color: #fff; /* White text */
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 90px; /* Rounded edges */
+  box-shadow: 
+    5px 5px 15px rgba(0, 0, 0, 0.5), /* Button shadow for depth */
+    -5px -5px 15px rgba(133, 14, 14, 0.1); /* Button highlight */
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.signup-button:hover {
+  background: linear-gradient(145deg, rgba(34, 197, 94, 1), rgba(11, 80, 141, 1)); /* Darker gradient on hover */
+  transform: translateY(-3px); /* Lift effect on hover */
+  box-shadow: 
+    7px 7px 20px rgba(0, 0, 0, 0.7), /* Stronger shadow on hover */
+    -7px -7px 20px rgba(255, 255, 255, 0.2); /* Stronger highlight on hover */
+}
+
+/* Input field styling */
+.login-input {
+  width: 100%;
+  padding: 12px 15px;
+  background-color: rgba(255, 255, 255, 0.9); /* Slightly opaque background */
+  border: 1px solid rgba(0, 0, 0, 0.3); /* Light border */
+  border-radius: 30px; /* Smooth rounded corners */
+  color: #333; /* Darker text for readability */
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  transition: border 0.3s ease;
+}
+
+.login-input:focus {
+  border-color: rgb(22, 18, 137); /* Green highlight when focused */
+  outline: none;
+}
+
+/* Updated login form */
+.login-form {
+  background: white; /* White background for the form */
+  border-radius: 79px; /* Smoother rounded corners */
+  box-shadow: 
+    20px 20px 30px rgba(0, 0, 0, 0.5), /* Right and down shadow */
+    -20px -20px 30px rgba(255, 255, 255, 0.1); /* Left and up shadow */
+  padding: 2rem;
+  transform: translateY(5px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-form:hover {
+  transform: translateY(0); /* Elevation on hover */
+  box-shadow: 
+    25px 25px 40px rgba(0, 0, 0, 0.7), /* Stronger shadow on hover */
+    -25px -25px 40px rgba(255, 255, 255, 0.2);
+}
