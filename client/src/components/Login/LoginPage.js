@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import logo from '../../assets/IEEE-CS_LogoTM-white.png';
-import { Sun, Moon, Mail, Lock, UserPlus, Facebook, Twitter, Globe, Github, Fingerprint, EyeOff, Eye, AlertCircle } from 'lucide-react';
+import { Sun, Moon, Mail, Lock,Fingerprint, EyeOff, Eye} from 'lucide-react';
 
 const LoginPage = () => {
     const [darkMode, setDarkMode] = useState(false);
