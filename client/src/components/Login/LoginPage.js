@@ -218,7 +218,7 @@ const LoginPage = () => {
 
                             <div className="text-sm">
                                 <a
-                                    href="#"
+                                    href="/signup"
                                     className={`font-medium transition-all duration-300 ${
                                         darkMode ? 'text-indigo-400 hover:text-indigo-300' : 'text-indigo-600 hover:text-indigo-500'
                                     }`}
