@@ -6,11 +6,7 @@ from dotenv import load_dotenv
 import os
 
 app = FastAPI()
-
-# Load environment variables from .env file
 load_dotenv(dotenv_path="credentials.env")
-
-# Load Google credentials from environment variables
 creds_info = {
     "type": "service_account",
     "project_id": os.getenv("PROJECT_ID"),
