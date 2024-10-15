@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.hover\:transform-rotate-x:hover {
+  transform: rotateX(10deg);
+}
+
+.hover\:transform-rotate-y:hover {
+  transform: rotateY(10deg);
+}
+.bg-custom-black {
+  background-color: #1a1616;
+}
+.card-container {
+  transition: transform 0.3s, filter 0.3s;
+}
+.bg-dark-bg {
+  background-color: #000000;
+}
+@keyframes fade-in {
+  0% {
+    transform: translateY(20px) scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-in-out forwards; /* Apply the fade-in animation */
+}
