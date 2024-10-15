@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Sun, Moon, Mail, Lock, Phone, UserPlus, EyeOff, Eye, AlertCircle } from 'lucide-react';
+import { Sun, Moon, Mail, Lock, Phone, UserPlus, EyeOff, Eye } from 'lucide-react';
 
 const SignupPage = () => {
     const [darkMode, setDarkMode] = useState(false);
