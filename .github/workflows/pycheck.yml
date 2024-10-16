@@ -24,12 +24,11 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install fastapi
-          pip install uvicorn
+          pip install -r requirements.txt
 
       - name: Set up environment variables
         run: |
-          echo "TYPE=${{ secrets.TYPE }}" >> $GITHUB_ENV
+          echo "TYPE=${{ secrets.secrets.TYPE }}" >> $GITHUB_ENV
           echo "PROJECT_ID=${{ secrets.PROJECT_ID }}" >> $GITHUB_ENV
           echo "PRIVATE_KEY_ID=${{ secrets.PRIVATE_KEY_ID }}" >> $GITHUB_ENV
           echo "PRIVATE_KEY=${{ secrets.PRIVATE_KEY }}" >> $GITHUB_ENV
