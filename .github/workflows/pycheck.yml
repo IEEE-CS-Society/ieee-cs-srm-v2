@@ -1,4 +1,5 @@
-name: Check FastAPI Server with Google Sheets
+name: Check FastAPI Server with Google Sheets Integration
+
 on:
   push:
     branches:
@@ -22,15 +23,12 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd server
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-
-      - name: Set up environment variables
       env:
-        ENV_FILE: credentials.env
-      run: |
-        export $(cat $ENV_FILE | xargs)
+        ENV_FILE: server/.env
+      - run: |
+          source $ENV_FILE
 
       - name: Run FastAPI server from server folder in the background
         run: |
