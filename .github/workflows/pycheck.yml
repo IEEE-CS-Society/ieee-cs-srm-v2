@@ -28,21 +28,14 @@ jobs:
           pip install -r requirements.txt
 
       - name: Set up environment variables
-        run: |
-          echo "TYPE=${{ secrets.secrets.TYPE }}" >> $GITHUB_ENV
-          echo "PROJECT_ID=${{ secrets.PROJECT_ID }}" >> $GITHUB_ENV
-          echo "PRIVATE_KEY_ID=${{ secrets.PRIVATE_KEY_ID }}" >> $GITHUB_ENV
-          echo "PRIVATE_KEY=${{ secrets.PRIVATE_KEY }}" >> $GITHUB_ENV
-          echo "CLIENT_EMAIL=${{ secrets.CLIENT_EMAIL }}" >> $GITHUB_ENV
-          echo "CLIENT_ID=${{ secrets.CLIENT_ID }}" >> $GITHUB_ENV
-          echo "AUTH_URI=${{ secrets.AUTH_URI }}" >> $GITHUB_ENV
-          echo "TOKEN_URI=${{ secrets.TOKEN_URI }}" >> $GITHUB_ENV
-          echo "AUTH_PROVIDER_X509_CERT_URL=${{ secrets.AUTH_PROVIDER_X509_CERT_URL }}" >> $GITHUB_ENV
-          echo "CLIENT_X509_CERT_URL=${{ secrets.CLIENT_X509_CERT_URL }}" >> $GITHUB_ENV
+      env:
+        ENV_FILE: credentials.env
+      run: |
+        export $(cat $ENV_FILE | xargs)
 
       - name: Run FastAPI server from server folder in the background
         run: |
-          nohup uvicorn main:app --host 0.0.0.0 --port 8000 &
+          cd server && nohup uvicorn main:app --host 0.0.0.0 --port 8000 &
           sleep 5
 
       - name: Check if FastAPI server is running
