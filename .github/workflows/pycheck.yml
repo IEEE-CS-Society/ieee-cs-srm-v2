@@ -1,5 +1,4 @@
-name: Check FastAPI Server with Google Sheets Integration
-
+name: Check FastAPI Server with Google Sheets
 on:
   push:
     branches:
