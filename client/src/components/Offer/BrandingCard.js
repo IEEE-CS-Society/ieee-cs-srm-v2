@@ -1,6 +1,6 @@
 import React from 'react';
-import { CardBody, CardContainer, CardItem } from '../ui/3d-card';
-import BrandIc from '../images/brand.svg';
+import { CardBody, CardContainer, CardItem } from '../../assets/ui/3d-card';
+import BrandIc from '../../assets/images/brand.svg';
 
 const BrandingCard = () => {
   return (

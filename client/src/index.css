@@ -14,3 +14,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.hover\:transform-rotate-x:hover {
+  transform: rotateX(10deg);
+}
+
+.hover\:transform-rotate-y:hover {
+  transform: rotateY(10deg);
+}
+.bg-custom-black {
+  background-color: #1a1616;
+}

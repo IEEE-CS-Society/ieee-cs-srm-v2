@@ -1,8 +1,8 @@
 import React from 'react';
-import { CardBody, CardContainer, CardItem } from '../ui/3d-card';
-import WebIc from '../images/web.svg';
+import { CardBody, CardContainer, CardItem } from '../../assets/ui/3d-card';
+import DigIc from '../../assets/images/digital.svg';
 
-const WebDevCard = () => {
+const DigitalMarketingCard = () => {
   return (
     <CardContainer className="inter-var w-full">
       <CardBody
@@ -11,23 +11,24 @@ const WebDevCard = () => {
         <CardItem translateZ={50} className="relative">
           <img
             className="w-10 h-10 mb-4"
-            src={WebIc}
-            alt="WebDev Icon"
+            src={DigIc}
+            alt="Brand Icon"
           />
         </CardItem>
 
         <CardItem translateZ={40} className="relative z-10">
-          <h3
-            className="mb-2"
+          <h3 
+            className="mb-2" 
             style={{ fontFamily: 'Roboto', fontSize: '28px', fontWeight: 'bold', color: '#FFFFFF' }}>
-            Web Development
+            Digital Marketing
           </h3>
         </CardItem>
 
         <CardItem translateZ={30} className="relative z-10">
           <p className="text-sm mt-5"
             style={{ fontFamily: 'Roboto', fontSize: '14px', color: '#9E9E9E' }}>
-            Integer ante non nunc, eget est justo vel semper nunc. Lacus.
+            Sed faucibus faucibus egestas volutpat, accumsan adipiscing egestas est.
+            Auctor et leo urna est.
           </p>
         </CardItem>
 
@@ -37,4 +38,4 @@ const WebDevCard = () => {
   );
 };
 
-export default WebDevCard;
+export default DigitalMarketingCard;

@@ -1,8 +1,8 @@
 import React from 'react';
-import { CardBody, CardContainer, CardItem } from '../ui/3d-card';
-import DigIc from '../images/digital.svg';
+import { CardBody, CardContainer, CardItem } from '../../assets/ui/3d-card';
+import MobIc from '../../assets/images/mobile.svg';
 
-const DigitalMarketingCard = () => {
+const MobileAppCard = () => {
   return (
     <CardContainer className="inter-var w-full">
       <CardBody
@@ -11,7 +11,7 @@ const DigitalMarketingCard = () => {
         <CardItem translateZ={50} className="relative">
           <img
             className="w-10 h-10 mb-4"
-            src={DigIc}
+            src={MobIc}
             alt="Brand Icon"
           />
         </CardItem>
@@ -20,15 +20,14 @@ const DigitalMarketingCard = () => {
           <h3 
             className="mb-2" 
             style={{ fontFamily: 'Roboto', fontSize: '28px', fontWeight: 'bold', color: '#FFFFFF' }}>
-            Digital Marketing
+            Mobile App
           </h3>
         </CardItem>
 
         <CardItem translateZ={30} className="relative z-10">
           <p className="text-sm mt-5"
             style={{ fontFamily: 'Roboto', fontSize: '14px', color: '#9E9E9E' }}>
-            Sed faucibus faucibus egestas volutpat, accumsan adipiscing egestas est.
-            Auctor et leo urna est.
+            Egestas tellus nunc proin amet tellus tincidunt lacus consequat. Ultrices.
           </p>
         </CardItem>
 
@@ -38,4 +37,4 @@ const DigitalMarketingCard = () => {
   );
 };
 
-export default DigitalMarketingCard;
+export default MobileAppCard;

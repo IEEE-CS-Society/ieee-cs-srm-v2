@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
-import T1 from '../testimonials/1.svg';
-import T2 from '../testimonials/2.svg';
+import T1 from '../../assets/testimonials/1.svg';
+import T2 from '../../assets/testimonials/2.svg';
 
 const Testimonials = () => {
   const testimonials = [
