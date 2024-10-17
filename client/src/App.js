@@ -14,6 +14,9 @@ import SeoCard from './components/Offer/SeoCard';
 import UserTestingCard from './components/Offer/UserTestingCard';
 import Testimonials from './components/Offer/Testimonials';
 
+// import events
+import Events from './components/Events/Events';
+
 function App() {
     const [darkMode, setDarkMode] = useState(false);
 
@@ -36,6 +39,7 @@ function App() {
                 <Routes>
                     <Route path="/signup" element={<SignupPage />} />
                     <Route path="/login" element={<LoginPage />} />
+                    <Route path="/events" element={<Events />} />
                     <Route path="*" element={
                         <div>
                             <div className="bg-custom-black text-white py-16 px-8 min-h-screen">
