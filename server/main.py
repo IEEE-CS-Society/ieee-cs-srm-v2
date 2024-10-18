@@ -37,6 +37,11 @@ class Register(BaseModel):
     roll_no: str
     ieee_membership: str = None  
 
+class PasswordReset(BaseModel):
+    email: str
+    new_password: str
+    confirm_password: str
+
 def user_exists(email: str):
     records = sheet.get_all_records()
     for record in records:
@@ -72,3 +77,20 @@ async def register(new_user: Register):
     ])
     
     return {"message": "Registration successful! Please log in."}
+
+@app.post("/reset-password")
+async def reset_password(reset_request: PasswordReset):
+    existing_user = user_exists(reset_request.email)
+
+    if not existing_user:
+        raise HTTPException(status_code=404, detail="User not found.")
+    if reset_request.new_password != reset_request.confirm_password:
+        raise HTTPException(status_code=400, detail="Passwords do not match.")
+    try:
+        cell = sheet.find(reset_request.email)
+        row_index = cell.row
+        sheet.update_cell(row_index, 2, reset_request.new_password)  
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error updating password: {str(e)}")
+    return {"message": "Password updated successfully!"}
+
