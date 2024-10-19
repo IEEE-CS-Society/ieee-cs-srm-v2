@@ -5,3 +5,11 @@ google-auth
 google-auth-oauthlib
 python-dotenv
 pytest
+psycopg2
+supabase
+datetime
+pyjwt
+pydantic
+smtplib
+email
+fastapi[all]

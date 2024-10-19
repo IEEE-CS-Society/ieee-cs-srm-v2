@@ -39,41 +39,15 @@
     transform: rotate(360deg);
   }
 }
-.perspective-1000 {
-  perspective: 1000px;
+@font-face {
+  font-family: 'AgrandirRegular';
+  src: url('./fonts/Agrandir.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
 }
 
-.transform-style-3d {
-  transform-style: preserve-3d;
-}
-
-.hover\:transform-rotate-x:hover {
-  transform: rotateX(10deg);
-}
-
-.hover\:transform-rotate-y:hover {
-  transform: rotateY(10deg);
-}
-.bg-custom-black {
-  background-color: #1a1616;
-}
-.card-container {
-  transition: transform 0.3s, filter 0.3s;
-}
-.bg-dark-bg {
-  background-color: #000000;
-}
-@keyframes fade-in {
-  0% {
-    transform: translateY(20px) scale(0.9);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-  }
-}
-
-.animate-fade-in {
-  animation: fade-in 0.5s ease-in-out forwards; /* Apply the fade-in animation */
+.gradient-text {
+  background-image: linear-gradient(45deg, #9f8ced 0%,#fa7c0b 51%,#9de8ee 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

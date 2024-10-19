@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import logo from '../../assets/IEEE-CS_LogoTM-white.png';
-import { Sun, Moon, Mail, Lock,Fingerprint, EyeOff, Eye} from 'lucide-react';
+import logo from '../../assets/logo/IEEE-CS_LogoTM-white.png';
+import { Sun, Moon, Mail, Lock, Fingerprint, EyeOff, Eye } from 'lucide-react';
 
 const LoginPage = () => {
     const [darkMode, setDarkMode] = useState(false);
@@ -9,6 +9,8 @@ const LoginPage = () => {
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [loginMethod, setLoginMethod] = useState('email');
+    const [errorMessage, setErrorMessage] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const toggleDarkMode = () => setDarkMode(!darkMode);
 
@@ -37,6 +39,41 @@ const LoginPage = () => {
     const itemVariants = {
         hidden: { opacity: 0, y: 30 },
         visible: { opacity: 1, y: 0 },
+    };
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+
+        const loginData = {
+            email: email,
+            password: password,
+        };
+
+        try {
+            const response = await fetch('http://localhost:8000/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(loginData),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                console.log('Login successful!', data);
+                window.location.href = '/signup';
+                // Handle successful login (e.g., save token, redirect)
+            } else {
+                setErrorMessage(data.detail || 'Login failed, please try again.');
+            }
+        } catch (error) {
+            console.error('Error during login:', error);
+            setErrorMessage('An error occurred. Please try again later.');
+        }
+
+        setIsLoading(false);
     };
 
     return (
@@ -73,9 +110,7 @@ const LoginPage = () => {
 
             {/* Main container */}
             <motion.div
-                className={`max-w-md w-full space-y-8 p-10 ${
-                    darkMode ? 'bg-gray-900' : 'bg-white'
-                } rounded-3xl shadow-2xl relative z-10 backdrop-filter backdrop-blur-md bg-opacity-95`}
+                className={`max-w-md w-full space-y-8 p-10 ${darkMode ? 'bg-gray-900' : 'bg-white'} rounded-3xl shadow-2xl relative z-10 backdrop-filter backdrop-blur-md bg-opacity-95`}
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
@@ -83,11 +118,9 @@ const LoginPage = () => {
                 {/* Logo and title */}
                 <motion.div className="text-center" variants={itemVariants}>
                     <motion.div
-                        className={`mx-auto h-20 w-20 rounded-full ${
-                            darkMode ? 'bg-indigo-500' : 'bg-indigo-600'
-                        } flex items-center justify-center shadow-lg`}
-                        whileHover={{scale: 1.15}}
-                        whileTap={{scale: 0.95}}
+                        className={`mx-auto h-20 w-20 rounded-full ${darkMode ? 'bg-indigo-500' : 'bg-indigo-600'} flex items-center justify-center shadow-lg`}
+                        whileHover={{ scale: 1.15 }}
+                        whileTap={{ scale: 0.95 }}
                     >
                         <img
                             src={logo}
@@ -104,7 +137,6 @@ const LoginPage = () => {
                     </p>
                 </motion.div>
 
-                {/* Login method toggle */}
                 <motion.div className="flex justify-center space-x-4 mt-8" variants={itemVariants}>
                     <button
                         onClick={() => setLoginMethod('email')}
@@ -138,7 +170,7 @@ const LoginPage = () => {
 
                 {/* Login form */}
                 {loginMethod === 'email' && (
-                    <motion.form className="mt-8 space-y-6" action="#" method="POST" variants={itemVariants}>
+                    <motion.form className="mt-8 space-y-6" onSubmit={handleLogin} variants={itemVariants}>
                         <div className="space-y-4">
                             <div>
                                 <label htmlFor="email-address" className="sr-only">
@@ -201,32 +233,12 @@ const LoginPage = () => {
                             </div>
                         </div>
 
-                        <div className="flex items-center justify-between">
-                            <div className="flex items-center">
-                                <input
-                                    id="remember-me"
-                                    name="remember-me"
-                                    type="checkbox"
-                                    className={`h-4 w-4 rounded transition-all duration-200 ${
-                                        darkMode ? 'text-indigo-600 bg-gray-800 border-gray-600' : 'text-indigo-600 bg-white border-gray-300'
-                                    } focus:ring-indigo-500`}
-                                />
-                                <label htmlFor="remember-me" className={`ml-2 block text-sm ${darkMode ? 'text-gray-300' : 'text-gray-900'}`}>
-                                    Remember me
-                                </label>
-                            </div>
-
-                            <div className="text-sm">
-                                <a
-                                    href="/signup"
-                                    className={`font-medium transition-all duration-300 ${
-                                        darkMode ? 'text-indigo-400 hover:text-indigo-300' : 'text-indigo-600 hover:text-indigo-500'
-                                    }`}
-                                >
-                                    Forgot your password?
-                                </a>
-                            </div>
-                        </div>
+                        {/* Error message */}
+                        {errorMessage && (
+                            <p className="text-red-500 text-sm text-center mt-2">
+                                {errorMessage}
+                            </p>
+                        )}
 
                         <div>
                             <motion.button
@@ -236,8 +248,9 @@ const LoginPage = () => {
                                 } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
                                 whileHover={{ scale: 1.07 }}
                                 whileTap={{ scale: 0.95 }}
+                                disabled={isLoading}
                             >
-                                Sign in
+                                {isLoading ? 'Signing in...' : 'Sign in'}
                             </motion.button>
                         </div>
                     </motion.form>
@@ -287,8 +300,6 @@ const LoginPage = () => {
                         </div>
                     </div>
                 </motion.div>
-
-                {/* Dark mode toggle */}
                 <motion.div className="absolute top-4 right-4" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
                     <button
                         onClick={toggleDarkMode}
