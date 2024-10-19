@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
 import { motion } from 'framer-motion';
 import { Sun, Moon, Mail, Lock, Phone, UserPlus, EyeOff, Eye } from 'lucide-react';
 
@@ -13,8 +14,70 @@ const SignupPage = () => {
         ieeeMembershipNumber: '',
     });
     const [showPassword, setShowPassword] = useState(false);
+    const [isLoading, setIsLoading] = useState(false); // For loading state
+    const [errorMessage, setErrorMessage] = useState(''); // For displaying errors
+    const [successMessage, setSuccessMessage] = useState(''); // For success messages
+
+    const navigate = useNavigate(); // Get the navigate function from react-router-dom
 
     const toggleDarkMode = () => setDarkMode(!darkMode);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+        setErrorMessage('');
+        setSuccessMessage('');
+
+        // Prepare data for API request
+        const requestData = {
+            email: formData.email,
+            password: formData.password,
+            phone_number: formData.phoneNumber,
+            srm_id: formData.srmMailId,
+            roll_no: formData.registrationNumber,
+            ieee_membership: formData.ieeeMembershipNumber || null, // Handle optional IEEE membership
+        };
+
+        try {
+            const response = await fetch('http://localhost:8000/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestData),
+            });
+
+            const result = await response.json();
+            if (response.ok) {
+                setSuccessMessage('Account created successfully! Redirecting to login page...');
+                // Clear form
+                setFormData({
+                    email: '',
+                    password: '',
+                    phoneNumber: '',
+                    srmMailId: '',
+                    registrationNumber: '',
+                    ieeeMembershipNumber: '',
+                });
+
+                // Redirect to /login after 4 seconds
+                setTimeout(() => {
+                    navigate('/login'); // Redirect to login page
+                }, 4000); // 4 seconds
+            } else {
+                setErrorMessage(result.detail || 'Signup failed. Please try again.');
+            }
+        } catch (error) {
+            setErrorMessage('Error connecting to the server. Please try again later.');
+        }
+
+        setIsLoading(false);
+    };
 
     const backgroundVariants = {
         light: {
@@ -41,11 +104,6 @@ const SignupPage = () => {
     const itemVariants = {
         hidden: { opacity: 0, y: 30 },
         visible: { opacity: 1, y: 0 },
-    };
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
     };
 
     return (
@@ -82,9 +140,7 @@ const SignupPage = () => {
 
             {/* Main container */}
             <motion.div
-                className={`max-w-lg w-full space-y-8 p-10 ${
-                    darkMode ? 'bg-gray-900' : 'bg-white'
-                } rounded-3xl shadow-2xl relative z-10 backdrop-filter backdrop-blur-md bg-opacity-95`}
+                className={`max-w-lg w-full space-y-8 p-10 ${darkMode ? 'bg-gray-900' : 'bg-white'} rounded-3xl shadow-2xl relative z-10 backdrop-filter backdrop-blur-md bg-opacity-95`}
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
@@ -92,9 +148,7 @@ const SignupPage = () => {
                 {/* Logo and title */}
                 <motion.div className="text-center" variants={itemVariants}>
                     <motion.div
-                        className={`mx-auto h-24 w-24 rounded-full ${
-                            darkMode ? 'bg-indigo-500' : 'bg-indigo-600'
-                        } flex items-center justify-center shadow-lg transform hover:rotate-12 transition-all duration-500`}
+                        className={`mx-auto h-24 w-24 rounded-full ${darkMode ? 'bg-indigo-500' : 'bg-indigo-600'} flex items-center justify-center shadow-lg transform hover:rotate-12 transition-all duration-500`}
                         whileHover={{ scale: 1.2 }}
                         whileTap={{ scale: 0.95 }}
                     >
@@ -109,7 +163,7 @@ const SignupPage = () => {
                 </motion.div>
 
                 {/* Signup form */}
-                <motion.form className="mt-8 space-y-6" action="#" method="POST" variants={itemVariants}>
+                <motion.form className="mt-8 space-y-6" onSubmit={handleSubmit} variants={itemVariants}>
                     <div className="space-y-6">
                         <div>
                             <label htmlFor="email" className="sr-only">
@@ -260,6 +314,10 @@ const SignupPage = () => {
                         </div>
                     </div>
 
+                    {/* Success and error messages */}
+                    {errorMessage && <p className="text-red-500 text-center">{errorMessage}</p>}
+                    {successMessage && <p className="text-green-500 text-center">{successMessage}</p>}
+
                     <div>
                         <motion.button
                             type="submit"
@@ -268,8 +326,9 @@ const SignupPage = () => {
                             } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 shadow-xl transform hover:scale-105 hover:-rotate-1`}
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.95 }}
+                            disabled={isLoading}
                         >
-                            Sign up
+                            {isLoading ? 'Signing up...' : 'Sign up'}
                         </motion.button>
                     </div>
                 </motion.form>
