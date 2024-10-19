@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+<<<<<<< HEAD
 import logo from '../../assets/logo/IEEE-CS_LogoTM-white.png';
+=======
+import logo from '../../assets/IEEE-CS_LogoTM-white.png';
+>>>>>>> 2992d069dd27aeb991f55be3a1db6c199b192576
 import { Sun, Moon, Mail, Lock, Fingerprint, EyeOff, Eye } from 'lucide-react';
 
 const LoginPage = () => {
