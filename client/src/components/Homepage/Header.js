@@ -135,9 +135,9 @@ const Header = () => {
                 <img src={Image1} alt="Ieee-cs" style={{ height: '40px' }} />
             </Logo>
             <Nav>
-                <NavLink href="#about">About</NavLink>
-                <NavLink href="#team">Team</NavLink>
-                <NavLink href="#events">Events</NavLink>
+                <NavLink href="/about">About</NavLink>
+                <NavLink href="/team">Team</NavLink>
+                <NavLink href="/events">Events</NavLink>
                 <ContactButton href="./login">Login</ContactButton>
             </Nav>
             <MobileMenuIcon onClick={toggleMenu}>

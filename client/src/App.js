@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Team from './components/Homepage/Team';
 import Events from './components/Homepage/Events';
-import Footer from './components/Homepage/Footer';
+import Footer from './components/Homepage/footer';
 import Header from './components/Homepage/Header';
 import Index from './components/Homepage/Hero';
 import './App.css';
@@ -15,6 +15,7 @@ function App() {
             <Routes>
                 <Route path="/signup" element={<SignupPage />} />
                 <Route path="/login" element={<LoginPage />} />
+                <Route path="/events" element={<Events />} />
                 <Route path="*" element={
                     <div>
                         <Header />

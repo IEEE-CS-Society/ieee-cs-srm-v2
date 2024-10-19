@@ -1,8 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { FaRegCalendarAlt, FaMapMarkerAlt, FaClock, FaTicketAlt } from "react-icons/fa";
 import { IoMdPeople } from "react-icons/io";
 import { memo } from "react";
+import { useNavigate } from 'react-router-dom';
+
+import TechImg from '../../assets/events/tech.jpg';
+/*import HackImg from '../../assets/events/hackathon.jpg';
+import CyberImg from '../../assets/events/cyber.jpg';
+import IoTImg from '../../assets/events/IoT.jpg';
+import WebinarImg from '../../assets/events/webinar.jpg';
+import UIImg from '../../assets/events/ui-ux.jpg';
+import BootImg from '../../assets/events/boot.jpg';
+import AIImg from '../../assets/events/ai.jpg';*/
+
 
 const fadeIn = keyframes`
   0% { opacity: 0; transform: translateY(20px); }
@@ -114,7 +125,8 @@ const WorkCard = styled.div`
 
 const ImagePlaceholder = styled.div`
   height: 120px;
-  background: #9573c4;
+  background: url(${(props) => props.image}) no-repeat center center;
+  background-size: cover;
   border-radius: 12px;
   animation: ${fadeIn} 2s ease-in-out;
   position: relative;
@@ -320,16 +332,11 @@ const LightboxButton = styled.button`
   }
 `;
 
-const data = [
-    { tag: "Conference", title: "The Future of Web Development", details: "Join us for an in-depth look at the future of web development, including new technologies and trends.", time: "10:00 AM - 4:00 PM", place: "Tech Conference Center, NY", date: "March 15, 2024", fees: "$99", benefits: "Certificate of Participation, Lunch, and Networking Opportunities" },
-    { tag: "Workshop", title: "Hands-on JavaScript Training", details: "Get hands-on training with JavaScript in this interactive workshop led by industry experts.", time: "9:00 AM - 5:00 PM", place: "Online", date: "April 10, 2024", fees: "$49", benefits: "Live Q&A, Access to Recording, and Practice Materials" },
-    { tag: "Webinar", title: "Digital Marketing Insights", details: "Learn the latest insights in digital marketing from top professionals in the field.", time: "6:00 PM - 8:00 PM", place: "Online", date: "May 5, 2024", fees: "Free", benefits: "E-book and Webinar Recording" },
-    { tag: "Meetup", title: "User Experience Design Meetup", details: "Meet fellow designers and discuss the latest trends in user experience design.", time: "5:00 PM - 7:00 PM", place: "Downtown Design Hub, SF", date: "June 20, 2024", fees: "$10", benefits: "Snacks and Networking Opportunities" },
-    { tag: "Hackathon", title: "Automation and AI Challenge", details: "Join our hackathon and showcase your skills in automation and artificial intelligence.", time: "48 Hours", place: "Innovation Lab, LA", date: "July 15-17, 2024", fees: "$25", benefits: "Prizes, Swag, and Job Opportunities" },
-    { tag: "Seminar", title: "SEO Best Practices 2024", details: "Discover the best practices for SEO in 2024 and stay ahead of the competition.", time: "2:00 PM - 5:00 PM", place: "Marketing HQ, Chicago", date: "August 10, 2024", fees: "$30", benefits: "SEO Checklist and Networking" },
-];
-
-const App = () => {
+const Events = () => {
+    const navigate = useNavigate();
+    const [events, setEvents] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const [lightbox, setLightbox] = useState(null);
 
     const openLightbox = (event) => {
@@ -340,21 +347,44 @@ const App = () => {
         setLightbox(null);
     };
 
+    useEffect(() => {
+        const fetchEvents = async () => {
+            setLoading(true);
+            try {
+                const response = await fetch('http://127.0.0.1:8000/events');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch events');
+                }
+                const data = await response.json();
+                setEvents(data);
+            } catch (error) {
+                setError(error.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchEvents();
+    }, []);
+
+    if (loading) return <p>Loading events...</p>;
+    if (error) return <p>Error: {error}</p>;
+
     return (
         <Container>
-            <WorkSection>
-                <Title>Upcoming Events</Title>
-                <Description>
-                    Discover our latest events, conferences, and workshops. Join us and
-                    stay ahead in the ever-evolving tech industry. Learn, grow, and
-                    connect with like-minded professionals.
-                </Description>
-                <ShowMoreButton>Show More Events</ShowMoreButton>
+          <WorkSection>
+            <Title>Upcoming Events</Title>
+            <Description>
+              Discover our latest events, conferences, and workshops. Join us and
+              stay ahead in the ever-evolving tech industry. Learn, grow, and
+              connect with like-minded professionals.
+            </Description>
+            <ShowMoreButton onClick={() => navigate('/events')}>Show More Events</ShowMoreButton>
             </WorkSection>
             <GridContainer>
-                {data.map((item, index) => (
-                    <WorkCard key={index}>
-                        <ImagePlaceholder />
+                {events.map((item) => (
+                    <WorkCard key={item.id}>
+                        <ImagePlaceholder image={item.image || TechImg} />
                         <Tag>{item.tag}</Tag>
                         <WorkTitle>{item.title}</WorkTitle>
                         <ReadMore onClick={() => openLightbox(item)}>Read more</ReadMore>
@@ -387,4 +417,4 @@ const App = () => {
     );
 };
 
-export default memo(App);
+export default memo(Events);
