@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import logo from '../../assets/IEEE-CS_LogoTM-white.png';
+import logo from '../../assets/logo/IEEE-CS_LogoTM-white.png';
 import { Sun, Moon, Mail, Lock, Fingerprint, EyeOff, Eye } from 'lucide-react';
 
 const LoginPage = () => {

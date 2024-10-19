@@ -14,11 +14,11 @@ const SignupPage = () => {
         ieeeMembershipNumber: '',
     });
     const [showPassword, setShowPassword] = useState(false);
-    const [isLoading, setIsLoading] = useState(false); // For loading state
-    const [errorMessage, setErrorMessage] = useState(''); // For displaying errors
-    const [successMessage, setSuccessMessage] = useState(''); // For success messages
+    const [isLoading, setIsLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
 
-    const navigate = useNavigate(); // Get the navigate function from react-router-dom
+    const navigate = useNavigate();
 
     const toggleDarkMode = () => setDarkMode(!darkMode);
 
