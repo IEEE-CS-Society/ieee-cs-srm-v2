@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Team from './components/Homepage/Team';
 import Events from './components/Homepage/Events';
-import Footer from './components/Homepage/footer';
+import Footer from './components/Homepage/Footer';
 import Header from './components/Homepage/Header';
 import Index from './components/Homepage/Hero';
 import './App.css';
