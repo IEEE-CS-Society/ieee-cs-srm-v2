@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-<<<<<<< HEAD
 import logo from '../../assets/logo/IEEE-CS_LogoTM-white.png';
-=======
-import logo from '../../assets/IEEE-CS_LogoTM-white.png';
->>>>>>> 2992d069dd27aeb991f55be3a1db6c199b192576
 import { Sun, Moon, Mail, Lock, Fingerprint, EyeOff, Eye } from 'lucide-react';
 
 const LoginPage = () => {
@@ -141,7 +137,6 @@ const LoginPage = () => {
                     </p>
                 </motion.div>
 
-                {/* Login method toggle */}
                 <motion.div className="flex justify-center space-x-4 mt-8" variants={itemVariants}>
                     <button
                         onClick={() => setLoginMethod('email')}
@@ -305,8 +300,6 @@ const LoginPage = () => {
                         </div>
                     </div>
                 </motion.div>
-
-                {/* Dark mode toggle */}
                 <motion.div className="absolute top-4 right-4" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
                     <button
                         onClick={toggleDarkMode}
