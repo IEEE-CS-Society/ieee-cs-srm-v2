@@ -9,11 +9,12 @@ import os
 
 load_dotenv()
 
+# run command : python -m uvicorn main:app --reload
 
 app = FastAPI()
 
 origins = [
-    "http://localhost:3001","https://127.0.0.1:3001"
+    "http://localhost:3001","https://127.0.0.1:3001","http://localhost:3000","https://127.0.0.1:3000"
 
 ]
 
@@ -25,12 +26,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+#Change from here to what i sent on group
 SUPABASE_URL = 'SUPABASE URL'
 SUPABASE_KEY = 'SUPABASE_KEY'
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 DATABASE_URL = "URL"
 conn = psycopg2.connect(DATABASE_URL)
+
+#Change the above 5 lines
 
 
 class Event(BaseModel):
