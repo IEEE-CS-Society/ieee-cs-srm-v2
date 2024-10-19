@@ -34,6 +34,8 @@ supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 DATABASE_URL = "URL"
 conn = psycopg2.connect(DATABASE_URL)
 
+#Change the above 5 lines
+
 
 class Event(BaseModel):
     tag: str
