@@ -9,6 +9,7 @@ import os
 
 load_dotenv()
 
+# run command : python -m uvicorn main:app --reload
 
 app = FastAPI()
 
@@ -25,6 +26,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+#Change from here to what i sent on group
 SUPABASE_URL = 'SUPABASE URL'
 SUPABASE_KEY = 'SUPABASE_KEY'
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
