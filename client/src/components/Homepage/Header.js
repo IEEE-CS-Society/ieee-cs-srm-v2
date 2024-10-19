@@ -1,6 +1,6 @@
 import React, { memo, useState } from "react";
 import styled from 'styled-components';
-import { FiMenu, FiX } from 'react-icons/fi'; // Import icons for the menu
+import { FiMenu, FiX } from 'react-icons/fi';
 import Image1 from '../../assets/ieee-2.png';
 
 const HeaderContainer = styled.div`
@@ -34,7 +34,7 @@ const Nav = styled.nav`
   gap: 2rem;
 
   @media (max-width: 768px) {
-    display: none; /* Hide the navigation on mobile */
+    display: none;
   }
 `;
 
@@ -140,14 +140,10 @@ const Header = () => {
                 <NavLink href="#events">Events</NavLink>
                 <ContactButton href="./login">Login</ContactButton>
             </Nav>
-            {/* Mobile Menu Icon */}
             <MobileMenuIcon onClick={toggleMenu}>
                 {menuOpen ? <FiX /> : <FiMenu />}
             </MobileMenuIcon>
-
-            {/* Side Menu for Mobile */}
             <SideMenu isOpen={menuOpen}>
-                {/* Close Button Inside Side Menu */}
                 <SideMenuCloseButton onClick={toggleMenu}>
                     <FiX />
                 </SideMenuCloseButton>
