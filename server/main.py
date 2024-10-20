@@ -38,6 +38,8 @@ app.add_middleware(
 supabase: Client = create_client(os.getenv("SUPABASE_URL"), os.getenv("SUPABASE_KEY"))
 conn = psycopg2.connect(os.getenv("DATABASE_URL"))
 SECRET_KEY = os.getenv("SECRET_KEY")
+ALGORITHM = "HS256"
+
 ACCESS_TOKEN_EXPIRE_MINUTES=60
 #to here 
 
