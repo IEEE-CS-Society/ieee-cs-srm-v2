@@ -44,7 +44,7 @@ const SignupPage = () => {
         };
 
         try {
-            const response = await fetch('http://localhost:8000/register', {
+            const response = await fetch('https://ieee-cs-srm-v2.onrender.com/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
