@@ -51,7 +51,7 @@ const LoginPage = () => {
         };
 
         try {
-            const response = await fetch('http://localhost:8000/login', {
+            const response = await fetch('https://ieee-cs-srm-v2.onrender.com/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
