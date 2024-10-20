@@ -24,9 +24,8 @@ app = FastAPI(docs_url=None, redoc_url=None)
 #run command : python -m uvicorn main2:app --reload
 
 origins = [
-    "http://localhost:3000","http://localhost:3001","https://127.0.0.1:3001","http://localhost:8000","https://127.0.0.1:8000"
+    "http://ieee-cs-srm-v2.vercel.app","https://ieee-cs-srm-v2.vercel.app","http://localhost:3001","https://127.0.0.1:3001","http://localhost:8000","https://127.0.0.1:8000"
 ]
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -36,16 +35,9 @@ app.add_middleware(
 )
 
 #Change from here 
-
-SUPABASE_URL = os.getenv("SUPABASE_URL")
-SUPABASE_KEY = os.getenv("SUPABASE_KEY")
-supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
-
-DATABASE_URL = os.getenv("DATABASE_URL")
-conn = psycopg2.connect(DATABASE_URL)
+supabase: Client = create_client(os.getenv("SUPABASE_URL"), os.getenv("SUPABASE_KEY"))
+conn = psycopg2.connect(os.getenv("DATABASE_URL"))
 SECRET_KEY = os.getenv("SECRET_KEY")
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 #to here 
 
@@ -130,9 +122,8 @@ def verify_token(token: str = Depends(oauth2_scheme)):
         raise HTTPException(status_code=403, detail="Invalid token.")
 
 def send_email(to_email, subject, body_html):
-    sender_email = "" #mail id
-    sender_password = os.getenv("EMAIL_PASSWORD")  # Make sure to set this in your .env file
-
+    sender_email = os.getenv("SENDER_EMAIL") #mail id
+    sender_password = os.getenv("SENDER_PASSWORD")
     msg = MIMEMultipart()
     msg['From'] = sender_email
     msg['To'] = to_email
@@ -482,7 +473,7 @@ async def password_reset(password_reset: PasswordReset):
             <h1>Password Reset</h1>
         </div>
         <div class="content">
-            <h1 class="hello">Hello, {reset_request.email}</h1>
+            <h1 class="hello">Hello, {password_reset.email}</h1>
             <p>We have received a request to reset your password. Here is your old password for reference:</p>
             <div class="important">
                 <strong>Old Password: {old_password}</strong>
