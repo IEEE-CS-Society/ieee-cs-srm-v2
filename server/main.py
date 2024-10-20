@@ -261,7 +261,7 @@ async def get_event_participants(event_id: int, current_user: str = Depends(veri
     return participants
 
 
-@app.get("/events", response_model=List[Dict])
+@app.get("/events")
 async def get_events():
     response = supabase.table('events').select('*').execute()
     return response.data
