@@ -24,7 +24,7 @@ app = FastAPI(docs_url=None, redoc_url=None)
 #run command : python -m uvicorn main2:app --reload
 
 origins = [
-    "http://ieee-cs-srm-v2.vercel.app","https://ieee-cs-srm-v2.vercel.app","http://localhost:3001","https://127.0.0.1:3001","http://localhost:8000","https://127.0.0.1:8000"
+    "http://ieee-cs-srm-v2.vercel.app","https://ieee-cs-srm-v2.vercel.app","http://ieee-cs-srm-v2.vercel.app/login","https://ieee-cs-srm-v2.vercel.app/login","http://ieee-cs-srm-v2.vercel.app/signup","https://ieee-cs-srm-v2.vercel.app/signup","http://localhost:3001","https://127.0.0.1:3001","http://localhost:8000","https://127.0.0.1:8000"
 ]
 app.add_middleware(
     CORSMiddleware,
