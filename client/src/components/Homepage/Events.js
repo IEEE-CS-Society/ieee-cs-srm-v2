@@ -4,6 +4,10 @@ import { FaRegCalendarAlt, FaMapMarkerAlt, FaClock, FaTicketAlt } from "react-ic
 import { IoMdPeople } from "react-icons/io";
 import { memo } from "react";
 import { useNavigate } from 'react-router-dom';
+import { Bars } from "react-loader-spinner";
+
+import { ReactComponent as TRex } from '../../assets/trex.svg';
+import { ReactComponent as AO } from '../../assets/akshit.svg';
 
 import TechImg from '../../assets/events/tech.jpg';
 /*import HackImg from '../../assets/events/hackathon.jpg';
@@ -13,7 +17,6 @@ import WebinarImg from '../../assets/events/webinar.jpg';
 import UIImg from '../../assets/events/ui-ux.jpg';
 import BootImg from '../../assets/events/boot.jpg';
 import AIImg from '../../assets/events/ai.jpg';*/
-
 
 const fadeIn = keyframes`
   0% { opacity: 0; transform: translateY(20px); }
@@ -367,9 +370,6 @@ const Events = () => {
         fetchEvents();
     }, []);
 
-    if (loading) return <p>Loading events...</p>;
-    if (error) return <p>Error: {error}</p>;
-
     return (
         <Container>
           <WorkSection>
@@ -382,6 +382,29 @@ const Events = () => {
             <ShowMoreButton onClick={() => navigate('/events')}>Show More Events</ShowMoreButton>
             </WorkSection>
             <GridContainer>
+                {loading && (
+                  <div className="flex justify-end items-center h-20">
+                  <Bars
+                    height="50"
+                    width="50"
+                    color="#ffb800"
+                    ariaLabel="loading"
+                    wrapperStyle={{ display: 'flex', height: '100%' }}
+                  />
+                  </div>
+                )}
+                {error && (
+                  <div className="flex justify-end items-center h-20">
+                    <TRex className="w-20 h-20 mr-2 animate-bounce" />
+                    <p className="text-red-500 text-lg mt-2 font-bold animate-shake">Error: {error}</p>
+                  </div>
+                )}
+                {!loading && !error && events.length === 0 && (
+                  <div className="flex justify-end items-center h-20">
+                    <AO className="w-20 h-20 mr-2 animate-bounce" />
+                    <p className="text-red-500 text-lg mt-2 font-bold animate-shake">No events available.</p>
+                  </div>
+                )}
                 {events.map((item) => (
                     <WorkCard key={item.id}>
                         <ImagePlaceholder image={item.image || TechImg} />
