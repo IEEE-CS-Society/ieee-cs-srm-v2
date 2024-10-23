@@ -34,12 +34,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-#Change from here 
+#Change from here
 supabase: Client = create_client(os.getenv("SUPABASE_URL"), os.getenv("SUPABASE_KEY"))
 conn = psycopg2.connect(os.getenv("DATABASE_URL"))
 SECRET_KEY = os.getenv("SECRET_KEY")
 
-#to here 
+#to here
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 USERNAME = "admin"
@@ -281,222 +281,161 @@ async def password_reset(password_reset: PasswordReset):
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Reset Notification</title>
+    <title>Your Password</title>
     <style>
-        @keyframes fadeIn {{
-            from {{
-                opacity: 0;
-            }}
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
-            to {{
-                opacity: 1;
-            }}
-        }}
-
-        @keyframes slideIn {{
-            from {{
-                transform: translateY(20px);
-                opacity: 0;
-            }}
-
-            to {{
-                transform: translateY(0);
-                opacity: 1;
-            }}
-        }}
-
-        body {{
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background-color: #1c1c1c;
-            color: #ffffff;
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f4f8;
             margin: 0;
             padding: 0;
-            line-height: 1.6;
-        }}
-
-        .container {{
-            max-width: 700px;
-            margin: 40px auto;
-            background-color: #2a2a2a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
             border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
             overflow: hidden;
-            animation: fadeIn 0.8s ease-out;
-        }}
-
-        .header {{
-            background: linear-gradient(135deg, #006064, #00838f);
-            padding: 50px 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        .logo-container {
             text-align: center;
-            color: #ffffff;
-        }}
-
-        .header img {{
-            max-width: 100%;
+            padding: 30px 0;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .logo {
+            max-width: 150px;
             height: auto;
-            margin-bottom: 20px;
-        }}
-
-        .header h1 {{
-            margin: 0;
-            font-size: 38px;
-            font-weight: bold;
+        }
+        .content {
+            background-color: rgba(255, 255, 255, 0.95);
+            margin: 20px;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            margin: 0 0 20px;
+            font-size: 28px;
+            font-weight: 700;
+            color: #333;
             text-transform: uppercase;
             letter-spacing: 1px;
-            animation: slideIn 0.8s ease-out;
-            text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.3);
-        }}
-
-        .content {{
-            margin: 20px;
-            text-align: center;
-            color: #dddddd;
-        }}
-
-        h1 {{
-            font-size: 28px;
-            color: #ffffff;
-            margin-bottom: 20px;
-            animation: slideIn 0.8s ease-out;
-        }}
-
-        .hello {{
-            color: #00c6ff;
-        }}
-
-        p {{
-            font-size: 18px;
-            margin-bottom: 20px;
-            color: #bbbbbb;
-            animation: fadeIn 1s ease-out;
-        }}
-
-        .important {{
-            background-color: #333a40;
-            padding: 20px;
-            border-left: 6px solid #3498db;
-            font-size: 20px;
-            color: #e74c3c;
+        }
+        p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            font-weight: 300;
+        }
+        .password-container {
+            background-color: #f0f4f8;
+            border: 2px solid #2575fc;
             border-radius: 8px;
-            animation: slideIn 1s ease-out;
-            max-width: 90%;
-            margin: 0 auto;
-        }}
-
-        .button {{
-            display: inline-block;
-            background: linear-gradient(135deg, #d63031, #ff7675);
-            color: #ffffff;
-            padding: 16px 40px;
-            text-decoration: none;
-            border-radius: 40px;
-            font-weight: bold;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-            margin-top: 20px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 1.2s ease-out;
-        }}
-
-        .button:hover,
-        .button:focus,
-        .button:active {{
-            background: linear-gradient(135deg, #c0392b, #e74c3c);
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-        }}
-
-        .button:active {{
-            transform: scale(0.95);
-        }}
-
-        .footer {{
-            background-color: #1e1e1e;
-            padding: 30px;
-            text-align: center;
-            font-size: 16px;
-            color: #999999;
-            border-top: 1px solid #333;
-        }}
-
-        .footer a {{
-            color: #3498db;
-            text-decoration: none;
-            transition: color 0.2s ease-in-out;
-        }}
-
-        .footer a:hover {{
-            color: #1f78c1;
-        }}
-
-        .social-links {{
-            margin: 20px 0;
-            text-align: center;
-        }}
-
-        .social-links a {{
-            display: inline-block;
-            margin: 0 10px;
-            text-decoration: none;
-            color: #bbbbbb;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }}
-
-        .social-links a:hover {{
-            color: #3498db;
-            transform: translateY(-2px);
-        }}
-
-        .warning {{
-            background-color: #3a3a3a;
-            border-left: 6px solid #e67e22;
             padding: 15px;
-            border-radius: 8px;
-            font-style: italic;
-            color: #e67e22;
-            animation: fadeIn 1.4s ease-out;
-            max-width: 90%;
-            margin: 0 auto;
-        }}
-
-        .footer .logo {{
-            width: 180px;
-            margin: 20px auto;
-        }}
+            margin: 20px 0;
+            font-size: 18px;
+            font-weight: 500;
+            color: #333;
+        }
+        .footer {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            position: relative;
+            z-index: 1;
+        }
+        .icon-container {
+            background: rgba(255, 255, 255, 0.2);
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 30px;
+        }
+        .icon {
+            font-size: 48px;
+            color: #ffffff;
+        }
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 20s infinite;
+            opacity: 0.3;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-30px) rotate(90deg); }
+            50% { transform: translateY(-15px) rotate(180deg); }
+            75% { transform: translateY(-30px) rotate(270deg); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .content > * {
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+        .content > *:nth-child(1) { animation-delay: 0.2s; }
+        .content > *:nth-child(2) { animation-delay: 0.4s; }
+        .content > *:nth-child(3) { animation-delay: 0.6s; }
+        .content > *:nth-child(4) { animation-delay: 0.8s; }
+        .content > *:nth-child(5) { animation-delay: 1s; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/47/IEEE_Computer.png/1200px-IEEE_Computer.png?20211216195043" alt="IEEE Logo" style="max-width: 100%; height: auto; margin-bottom: 20px;" />
-            <h1>Password Reset</h1>
-        </div>
-        <div class="content">
-            <h1 class="hello">Hello, {password_reset.email}</h1>
-            <p>We have received a request to reset your password. Here is your old password for reference:</p>
-            <div class="important">
-                <strong>Old Password: {old_password}</strong>
-            </div>
-            <p>If this request wasn't made by you, please contact our support team immediately.</p>
-            <div class="warning">
-                If you didn't initiate this request, please contact our support team immediately to secure your account.
-            </div>
-            <p>Need assistance with your password reset? Our support team is here to help:</p>
-            <a href="mailto:webdevteam.ieee@gmail.com?subject=Password%20Reset%20Assistance" class="button">Contact Support</a>
-            <div class="social-links">
-                <p>Connect with IEEE CS on:</p>
-                <a href="https://www.facebook.com/aicssyc/">Facebook</a> |
-                <a href="https://x.com/ComputerSociety">X</a> |
-                <a href="https://www.linkedin.com/company/ieee-computer-society/">LinkedIn</a>
-            </div>
-        </div>
-        <div class="footer">
-            <a href="https://ibb.co/fGFhXxs"><img src="https://i.ibb.co/QjQ2JK4/IEEE-shitstrip.jpg" alt="IEEE-shitstrip" border="0" /></a>
-            <p>&copy; {datetime.now().year} IEEE Computer Society. All rights reserved.</p>
-            <p><a href="#">Unsubscribe</a> | <a href="#">Privacy Policy</a></p>
-        </div>
+<div class="container">
+    <div class="particles">
+        <div class="particle" style="top: 20%; left: 10%; width: 30px; height: 30px; background-color: rgba(255,255,255,0.3);"></div>
+        <div class="particle" style="top: 60%; left: 80%; width: 20px; height: 20px; background-color: rgba(255,255,255,0.2);"></div>
+        <div class="particle" style="top: 80%; left: 30%; width: 25px; height: 25px; background-color: rgba(255,255,255,0.25);"></div>
+        <div class="particle" style="top: 40%; left: 60%; width: 15px; height: 15px; background-color: rgba(255,255,255,0.15);"></div>
+        <div class="particle" style="top: 10%; left: 90%; width: 35px; height: 35px; background-color: rgba(255,255,255,0.35);"></div>
     </div>
+    <div class="logo-container">
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/47/IEEE_Computer.png/1200px-IEEE_Computer.png?20211216195043" alt="Company Logo" class="logo">
+    </div>
+    <div class="content">
+        <div class="icon-container">
+            <span class="icon">🔑</span>
+        </div>
+
+        <h3 class="hello">Hello, {password_reset.email}</h3>
+        <h1>Your Password</h1>
+        <p>We received a request for your current password. Here it is:</p>
+        <div class="password-container">
+            {old_password}
+        </div>
+        <p>For security reasons, we recommend changing your password after logging in.</p>
+        <p style="font-size: 12px; margin-top: 30px; color: #777;">If you did not request this information, please contact our support team immediately at.</p>
+        <strong style="font-size: 13px;margin-top: 30px;color: #6a11cb;">webdevteam.ieee@gmail.com</strong>
+    </div>
+    <div class="footer">
+        <p>© {datetime.now().year} IEEE Computer Society. All rights reserved. Please do not reply to this email.</p>
+    </div>
+</div>
 </body>
 </html>
     """
