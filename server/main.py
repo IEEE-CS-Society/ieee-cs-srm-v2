@@ -24,11 +24,11 @@ app = FastAPI(docs_url=None, redoc_url=None)
 #run command : python -m uvicorn main2:app --reload
 
 origins = [
-    "http://ieee-cs-srm-v2.vercel.app","https://ieee-cs-srm-v2.vercel.app","http://localhost:3001","https://127.0.0.1:3001","http://localhost:8000","https://127.0.0.1:8000"
+    "http://ieee-cs-srm-v2.vercel.app","https://ieee-cs-srm-v2.vercel.app","http://ieee-cs-srm-v2.vercel.app/login","https://ieee-cs-srm-v2.vercel.app/login","http://ieee-cs-srm-v2.vercel.app/signup","https://ieee-cs-srm-v2.vercel.app/signup","http://localhost:3001","https://127.0.0.1:3001","http://localhost:8000","https://127.0.0.1:8000"
 ]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -38,8 +38,8 @@ app.add_middleware(
 supabase: Client = create_client(os.getenv("SUPABASE_URL"), os.getenv("SUPABASE_KEY"))
 conn = psycopg2.connect(os.getenv("DATABASE_URL"))
 SECRET_KEY = os.getenv("SECRET_KEY")
-
-#to here
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES=60
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 USERNAME = "admin"
@@ -261,35 +261,11 @@ async def get_event_participants(event_id: int, current_user: str = Depends(veri
     return participants
 
 
-@app.get("/events", response_model=List[Dict])
+@app.get("/events")
 async def get_events():
     response = supabase.table('events').select('*').execute()
     return response.data
 
-
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
-from datetime import datetime
-import asyncio
-
-app = FastAPI()
-
-class PasswordReset(BaseModel):
-    email: str
-
-def user_exists(email: str):
-    # Mocked function to check if user exists.
-    # Replace this with actual logic.
-    if email == "test@example.com":
-        return {"email": email, "password": "old_password123"}
-    return None
-
-def send_email(to_email: str, subject: str, body_html: str):
-    # Mocked function to send an email.
-    # Replace this with actual email sending logic.
-    print(f"Sending email to: {to_email}")
-    print(f"Subject: {subject}")
-    print(f"Body: {body_html}")
 
 @app.post("/password-reset")
 async def password_reset(password_reset: PasswordReset):
