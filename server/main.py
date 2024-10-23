@@ -285,7 +285,7 @@ async def password_reset(password_reset: PasswordReset):
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
-        body {
+        body {{
             font-family: 'Roboto', sans-serif;
             background-color: #f0f4f8;
             margin: 0;
@@ -294,8 +294,8 @@ async def password_reset(password_reset: PasswordReset):
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-        }
-        .container {
+        }}
+        .container {{
             max-width: 600px;
             width: 100%;
             background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
@@ -303,17 +303,13 @@ async def password_reset(password_reset: PasswordReset):
             overflow: hidden;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
             position: relative;
-        }
-        .logo-container {
+        }}
+        .logo-container {{
             text-align: center;
             padding: 30px 0;
             background-color: rgba(255, 255, 255, 0.1);
-        }
-        .logo {
-            max-width: 150px;
-            height: auto;
-        }
-        .content {
+        }}
+        .content {{
             background-color: rgba(255, 255, 255, 0.95);
             margin: 20px;
             padding: 40px;
@@ -322,22 +318,22 @@ async def password_reset(password_reset: PasswordReset):
             position: relative;
             z-index: 1;
             backdrop-filter: blur(10px);
-        }
-        h1 {
+        }}
+        h1 {{
             margin: 0 0 20px;
             font-size: 28px;
             font-weight: 700;
             color: #333;
             text-transform: uppercase;
             letter-spacing: 1px;
-        }
-        p {
+        }}
+        p {{
             color: #555;
             line-height: 1.8;
             margin-bottom: 25px;
             font-weight: 300;
-        }
-        .password-container {
+        }}
+        .password-container {{
             background-color: #f0f4f8;
             border: 2px solid #2575fc;
             border-radius: 8px;
@@ -346,8 +342,8 @@ async def password_reset(password_reset: PasswordReset):
             font-size: 18px;
             font-weight: 500;
             color: #333;
-        }
-        .footer {
+        }}
+        .footer {{
             background-color: rgba(255, 255, 255, 0.1);
             color: #ffffff;
             text-align: center;
@@ -355,8 +351,8 @@ async def password_reset(password_reset: PasswordReset):
             font-size: 12px;
             position: relative;
             z-index: 1;
-        }
-        .icon-container {
+        }}
+        .icon-container {{
             background: rgba(255, 255, 255, 0.2);
             width: 100px;
             height: 100px;
@@ -365,44 +361,31 @@ async def password_reset(password_reset: PasswordReset):
             justify-content: center;
             align-items: center;
             margin: 0 auto 30px;
-        }
-        .icon {
+        }}
+        .icon {{
             font-size: 48px;
             color: #ffffff;
-        }
-        .particles {
+        }}
+        .particles {{
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             overflow: hidden;
-        }
-        .particle {
+        }}
+        .particle {{
             position: absolute;
             border-radius: 50%;
             animation: float 20s infinite;
             opacity: 0.3;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            25% { transform: translateY(-30px) rotate(90deg); }
-            50% { transform: translateY(-15px) rotate(180deg); }
-            75% { transform: translateY(-30px) rotate(270deg); }
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .content > * {
-            animation: fadeInUp 0.6s ease-out forwards;
-            opacity: 0;
-        }
-        .content > *:nth-child(1) { animation-delay: 0.2s; }
-        .content > *:nth-child(2) { animation-delay: 0.4s; }
-        .content > *:nth-child(3) { animation-delay: 0.6s; }
-        .content > *:nth-child(4) { animation-delay: 0.8s; }
-        .content > *:nth-child(5) { animation-delay: 1s; }
+        }}
+        @keyframes float {{
+            0%, 100% {{ transform: translateY(0) rotate(0deg); }}
+            25% {{ transform: translateY(-30px) rotate(90deg); }}
+            50% {{ transform: translateY(-15px) rotate(180deg); }}
+            75% {{ transform: translateY(-30px) rotate(270deg); }}
+        }}
     </style>
 </head>
 <body>
@@ -415,7 +398,7 @@ async def password_reset(password_reset: PasswordReset):
         <div class="particle" style="top: 10%; left: 90%; width: 35px; height: 35px; background-color: rgba(255,255,255,0.35);"></div>
     </div>
     <div class="logo-container">
-        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/47/IEEE_Computer.png/1200px-IEEE_Computer.png?20211216195043" alt="Company Logo" class="logo">
+        <img src="https://ieeecomputer.my/wp-content/uploads/2021/07/logo-ieee-cs-my-white.png" alt="Company Logo" class="logo">
     </div>
     <div class="content">
         <div class="icon-container">
