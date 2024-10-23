@@ -398,7 +398,7 @@ async def password_reset(password_reset: PasswordReset):
         <div class="particle" style="top: 10%; left: 90%; width: 35px; height: 35px; background-color: rgba(255,255,255,0.35);"></div>
     </div>
     <div class="logo-container">
-        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/47/IEEE_Computer.png/1200px-IEEE_Computer.png?20211216195043" alt="Company Logo" class="logo">
+        <img src="https://ieeecomputer.my/wp-content/uploads/2021/07/logo-ieee-cs-my-white.png" alt="Company Logo" class="logo">
     </div>
     <div class="content">
         <div class="icon-container">
