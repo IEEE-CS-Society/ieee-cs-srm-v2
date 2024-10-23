@@ -305,6 +305,8 @@ async def password_reset(password_reset: PasswordReset):
             position: relative;
         }}
         .logo-container {{
+            max-width: 60px;
+            height: 60px;
             text-align: center;
             padding: 30px 0;
             background-color: rgba(255, 255, 255, 0.1);
