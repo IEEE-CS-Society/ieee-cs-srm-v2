@@ -305,12 +305,16 @@ async def password_reset(password_reset: PasswordReset):
             position: relative;
         }}
         .logo-container {{
-            max-width: 60px;
-            height: 60px;
             text-align: center;
-            padding: 30px 0;
+            padding: 15px 20px;
             background-color: rgba(255, 255, 255, 0.1);
+            justify-content: center;
+            align-items: center;
         }}
+        .logo-container img {{
+            height: 100px;  
+            width: 330px;
+        }}    
         .content {{
             background-color: rgba(255, 255, 255, 0.95);
             margin: 20px;
@@ -387,6 +391,33 @@ async def password_reset(password_reset: PasswordReset):
             25% {{ transform: translateY(-30px) rotate(90deg); }}
             50% {{ transform: translateY(-15px) rotate(180deg); }}
             75% {{ transform: translateY(-30px) rotate(270deg); }}
+        }}
+        @media (max-width: 600px) {{
+            .logo-container {{
+                padding-top: 10px;
+                transform: translateY(-20px); /* Move the logo up by 20px */
+            }}
+            .logo-container img {{
+                width: 200px; /* Adjust width for mobile */
+                height: auto;
+
+            }}
+            .icon-container {{
+                width: 50px; /* Decrease size of icon container for mobile */
+                height: 50px; /* Decrease size of icon container for mobile */
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+            }}
+            .container {{
+                padding-top: 0; /* Adjust padding in the main container if necessary */
+            }}
+            .icon {{
+                font-size: 30px; /* Decrease icon size for mobile */
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+            }}
         }}
     </style>
 </head>
